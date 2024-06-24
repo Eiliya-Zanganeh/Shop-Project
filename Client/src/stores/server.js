@@ -11,6 +11,7 @@ export default defineStore('server', {
         siteDescription: null,
         descriptionImg: null,
         howActiveUserAccount: null,
+        siteBanners:null,
         // Home Page Data & Shop Page:
         popularProducts: null,
         productCategorys: null,
@@ -87,6 +88,7 @@ export default defineStore('server', {
                 this.siteName === null ||
                 this.siteDescription === null ||
                 this.descriptionImg === null ||
+                this.siteBanners === null ||
                 this.howActiveUserAccount === null
             ) {
                 await axios.get(`${this.serverDomain}/site-setting/`).then(
@@ -95,6 +97,7 @@ export default defineStore('server', {
                         this.howActiveUserAccount = response.data.how_active_user_account
                         this.descriptionImg = response.data.description_img
                         this.siteDescription = response.data.site_description
+                        this.siteBanners = response.data.banners
                     }).catch(error => {
                     console.log(error)
                 })

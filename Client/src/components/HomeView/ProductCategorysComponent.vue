@@ -1,6 +1,6 @@
 <template>
   <div class="untree_co-section product-section before-footer-section">
-    <div class="container">
+    <div class="container-fluid">
       <h1 class="text-center mb-4">دسته بندی محصولات</h1>
       <swiper
           :breakpoints="{

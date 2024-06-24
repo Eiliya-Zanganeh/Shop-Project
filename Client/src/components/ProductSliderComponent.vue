@@ -1,6 +1,6 @@
 <template>
   <div class="product-section">
-    <div class="container">
+    <div class="container-fluid">
       <h1 class="text-center mb-4">{{ title }}</h1>
       <swiper
           :breakpoints="{

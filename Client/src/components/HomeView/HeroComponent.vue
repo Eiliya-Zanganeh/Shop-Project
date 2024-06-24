@@ -1,23 +1,36 @@
 <template>
-  <div class="hero">
-    <div class="container">
-      <div class="row justify-content-between">
-        <div class="col-lg-6">
-          <div class="intro-excerpt">
-            <h1 class="text-right"><span class="d-block">» {{ siteName }}</span></h1>
-            <p class="mb-4 text-right">{{ siteDescription }}</p>
-            <p><a href="" class="btn btn-secondary m-2">خدمات</a><a href="#" class="btn btn-white-outline text-light">محصولات</a>
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="hero-img-wrap"></div>
-          <transition name="image" appear>
-            <img style="width: 100%; height: auto" :src="`${serverDomain}/${descriptionImg}`">
-          </transition>
-        </div>
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button
+          type="button"
+          v-for="(banner, idx) in siteBanners" :key="banner.id"
+          :data-bs-slide-to="idx"
+          :class="{active:idx===0}"
+          :aria-current="idx===0"
+          data-bs-target="#carouselExampleFade"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div
+          :class="[{active:idx===0}, 'carousel-item']"
+          v-for="(banner, idx) in siteBanners"
+          :key="banner.id"
+          data-bs-interval="10000"
+      >
+        <img :src="`${serverDomain}/${banner.image}`" class="d-block w-100" alt="..."
+             style="height: 400px; object-fit: cover;">
       </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+            data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+            data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </template>
 
@@ -28,7 +41,7 @@ import {mapState} from "pinia";
 export default {
   name: "HeroComponent",
   computed: {
-    ...mapState(useServerStore, ['serverDomain', 'siteName', 'siteDescription', 'descriptionImg'])
+    ...mapState(useServerStore, ['serverDomain', 'siteName', 'siteDescription', 'siteBanners'])
   }
 }
 </script>
@@ -52,3 +65,5 @@ export default {
   }
 }
 </style>
+
+
