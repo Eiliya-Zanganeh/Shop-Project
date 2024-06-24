@@ -6,6 +6,7 @@ import CategoryShopView from "@/views/CategoryShopView.vue";
 import DetailProductView from "@/views/DetailProductView.vue";
 import CartView from "@/views/CartView.vue";
 import CheckoutView from "@/views/CheckoutView.vue";
+import SpecialProductsView from "@/views/SpecialProductsView.vue";
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/cart',
     name: 'cart',
     component: CartView
+  },
+  {
+    path: '/special-products',
+    name: 'special_products',
+    component: SpecialProductsView
   },
   {
     path: '/checkout',

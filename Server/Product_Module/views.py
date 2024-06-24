@@ -11,8 +11,7 @@ from Product_Module.models import ProductCategoryModel, ProductModel
 
 class PopularProductsView(APIView):
     def get(self, request: Request):
-        popular_products = SiteSettingModel.objects.filter(is_active=True).prefetch_related('popular_products').first()
-        popular_products = popular_products.popular_products
+        popular_products = ProductModel.objects.filter(offer__gt=0, count__gt=0).order_by('-id')[:10]
         popular_products_serializer = ProductSerializer(popular_products, many=True)
         return Response(popular_products_serializer.data, status=status.HTTP_200_OK)
 
@@ -50,6 +49,13 @@ class ProductWithCategoryView(generics.ListAPIView):
 
     def get_queryset(self):
         return ProductModel.objects.filter(category=self.kwargs['pk'], count__gt=0).order_by('-id')
+
+
+class SpecialProductsView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return ProductModel.objects.filter(offer__gt=0, count__gt=0).order_by('-id')
 
 
 class DetailProductView(APIView):

@@ -15,6 +15,7 @@ class GallerySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = ProductCategorySerializer(read_only=True)
     galleries = GallerySerializer(many=True, read_only=True)
 
     class Meta:

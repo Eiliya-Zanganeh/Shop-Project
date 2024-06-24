@@ -5,20 +5,13 @@ import axios from "axios";
 export default defineStore('server', {
     state: () => ({
         serverDomain: "http://localhost:8000",
-        // All Page Data:
+
         username: null,
+
         siteName: null,
         siteDescription: null,
-        descriptionImg: null,
         howActiveUserAccount: null,
         siteBanners:null,
-        // Home Page Data & Shop Page:
-        popularProducts: null,
-        productCategorys: null,
-
-        newProducts: null,
-        buyCountProducts: null,
-        visitCountProducts: null
     }),
     actions: {
         async refreshToken() {
@@ -95,7 +88,6 @@ export default defineStore('server', {
                     response => {
                         this.siteName = response.data.site_name
                         this.howActiveUserAccount = response.data.how_active_user_account
-                        this.descriptionImg = response.data.description_img
                         this.siteDescription = response.data.site_description
                         this.siteBanners = response.data.banners
                     }).catch(error => {
@@ -103,58 +95,5 @@ export default defineStore('server', {
                 })
             }
         },
-        async getPopularProducts() {
-            if (this.popularProducts === null) {
-                await axios.get(`${this.serverDomain}/product/popular-products/`).then(
-                    response => {
-                        this.popularProducts = response.data
-                    }).catch(error => {
-                    console.log(error)
-                })
-            }
-        },
-        async getProductCategorys() {
-            if (this.productCategorys === null) {
-                await axios.get(`${this.serverDomain}/product/product-categorys/`).then(
-                    response => {
-                        this.productCategorys = response.data
-                    }).catch(error => {
-                    console.log(error)
-                })
-            }
-        },
-        async getNewProducts() {
-            if (this.newProducts === null) {
-                await axios.get(`${this.serverDomain}/product/new-products/`).then(
-                    response => {
-                        this.newProducts = response.data
-                    }
-                ).catch((error) => {
-                    console.log(error)
-                })
-            }
-        },
-        async getBuyCountProducts() {
-            if (this.buyCountProducts === null) {
-                await axios.get(`${this.serverDomain}/product/buy-count-products/`).then(
-                    response => {
-                        this.buyCountProducts = response.data
-                    }
-                ).catch((error) => {
-                    console.log(error)
-                })
-            }
-        },
-        async getVisitCountProducts() {
-            if (this.visitCountProducts === null) {
-                await axios.get(`${this.serverDomain}/product/visit-count-products/`).then(
-                    response => {
-                        this.visitCountProducts = response.data
-                    }
-                ).catch((error) => {
-                    console.log(error)
-                })
-            }
-        }
     }
 })

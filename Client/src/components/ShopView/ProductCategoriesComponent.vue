@@ -26,7 +26,7 @@
           class="pt-5 ps-5 pe5 p-3"
       >
         <swiper-slide
-            v-for="(category) in productCategorys"
+            v-for="(category) in productCategories"
             :key="category"
         >
           <router-link class="product-item p-0" :to="{name: 'shop-category', params: {category: category.id}}">
@@ -39,9 +39,11 @@
               </span>
           </router-link>
         </swiper-slide>
+        <slot/>
       </swiper>
     </div>
   </div>
+  <hr>
 </template>
 <script>
 import useServerStore from '@/stores/server.js'
@@ -51,15 +53,35 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import axios from "axios";
 
 
 export default {
+  name:"ProductCategoriesComponent",
+  data(){
+    return{
+      productCategories: [],
+    }
+  },
   components: {
     Swiper,
     SwiperSlide,
   },
   computed: {
-    ...mapState(useServerStore, ['serverDomain', 'productCategorys']),
+    ...mapState(useServerStore, ['serverDomain']),
+  },
+  methods:{
+    async getProductCategoreis() {
+      await axios.get(`${this.serverDomain}/product/product-categories/`).then(
+          response => {
+            this.productCategories = response.data
+          }).catch(error => {
+        console.log(error)
+      })
+    },
+  },
+  mounted() {
+    this.getProductCategoreis()
   }
 }
 </script>

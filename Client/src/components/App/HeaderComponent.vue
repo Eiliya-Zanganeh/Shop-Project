@@ -16,10 +16,7 @@
           <router-link class="nav-item" :to="{name: 'shop'}">
             <p class="nav-link text-center">فروشگاه</p>
           </router-link>
-          <li><a class="nav-link text-center" href="about.html">درباره ما</a></li>
-          <li><a class="nav-link text-center" href="services.html">سرویس ها</a></li>
-          <li><a class="nav-link text-center" href="blog.html">مقالات</a></li>
-          <li><a class="nav-link text-center" href="contact.html">تماس با ما</a></li>
+
         </ul>
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5 justify-content-center">

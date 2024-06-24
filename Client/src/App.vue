@@ -10,8 +10,8 @@
 <script>
 import {mapActions} from "pinia";
 import useServerStore from "@/stores/server.js";
-import HeaderComponent from "@/components/HeaderComponent.vue";
-import FooterComponent from "@/components/FooterComponent.vue";
+import HeaderComponent from "@/components/App/HeaderComponent.vue";
+import FooterComponent from "@/components/App/FooterComponent.vue";
 
 export default {
   name: "App",

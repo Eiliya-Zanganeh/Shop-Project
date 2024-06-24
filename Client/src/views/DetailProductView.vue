@@ -4,7 +4,9 @@
       <div class="container-fliud">
         <div class="wrapper row">
           <div class="preview col-md-6">
-
+            <div class="alert alert-info" role="alert">
+              <h5 class="alert-heading text-center">فروش ویژه {{ category }}</h5>
+            </div>
             <div class="preview-pic tab-content">
               <div class="tab-pane active" id="pic-1"><img :src="`${serverDomain}/${current_image}`"/></div>
             </div>
@@ -33,7 +35,13 @@
             <h6>موجودی در انبار {{ product_count }}</h6>
             <br>
             <p class="product-description text-right">{{ product_description }}</p>
-            <h4 class="price text-right"><span>{{ Number(product_price).toLocaleString('fa-IR') }} تومان</span></h4>
+            <div class="d-flex align-items-center">
+              <h4 :class="['price text-right d-inline', {'offer': true}]">
+                <span>{{ Number(product_price).toLocaleString('fa-IR') }} تومان</span></h4>
+              <h6 class="me-3 bg-danger text-light rounded-circle p-3">50%</h6>
+            </div>
+            <h4 v-if="offer_price" class="price text-right"><span>{{ Number(offer_price).toLocaleString('fa-IR') }} تومان</span>
+            </h4>
             <div class="action">
               <button @click.prevent="addCart(product_id)" class="add-to-cart btn btn-block" type="button">اضافه کردن به
                 سبد خرید
@@ -51,7 +59,7 @@
 import axios from "axios";
 import {mapActions, mapState} from "pinia";
 import useServerStore from "@/stores/server.js";
-import ProductSliderComponent from "@/components/ProductSliderComponent.vue";
+import ProductSliderComponent from "@/components/ShopView/ProductSliderComponent.vue";
 
 export default {
   name: "DetailProductView",
@@ -69,7 +77,10 @@ export default {
       current_image: null,
       productCount: 4,
       suggested_products: null,
-      product_count: null
+      product_count: null,
+      offer_price: null,
+      category: null,
+      offer: null
     }
   },
   async mounted() {
@@ -84,10 +95,12 @@ export default {
           this.product_price = response.data.product.price
           this.suggested_products = response.data.suggested_products
           this.product_count = response.data.product.count
+          this.offer_price = response.data.product.offer_price
+          this.offer = response.data.product.offer
+          this.category = response.data.product.category.name
         }).catch((error) => {
       console.log(error)
     })
-    this.timer = setInterval(this.sliderNext, 5000);
   },
   methods: {
     ...mapActions(useServerStore, ['getUsername']),
@@ -98,13 +111,11 @@ export default {
       const result = this.product_galleries.shift()
       this.product_galleries.push(result)
       clearInterval(this.timer);
-      this.timer = setInterval(this.sliderNext, 5000);
     },
     sliderPrevious() {
       const result = this.product_galleries.pop()
       this.product_galleries.unshift(result)
       clearInterval(this.timer);
-      this.timer = setInterval(this.sliderNext, 5000);
     },
     async addCart(id) {
       this.getUsername().then(
@@ -125,13 +136,17 @@ export default {
         this.$router.push({name: 'login'})
       })
     }
-  },
-  beforeUnmount() {
-    clearInterval(this.timer);
   }
 }
 </script>
 
 <style>
 @import "@/assets/detail/detail.css";
+
+.offer {
+  opacity: 50%;
+  font-size: 18px;
+  text-decoration: line-through;
+  text-align: center;
+}
 </style>

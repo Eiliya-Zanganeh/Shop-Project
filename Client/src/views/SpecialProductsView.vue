@@ -1,15 +1,10 @@
 <template>
-<!--  <div class="hero">-->
-<!--    <div class="container">-->
-<!--      <div class="row justify-content-between">-->
-<!--        <h1 class="text-center"></h1>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-
   <div class="untree_co-section product-section before-footer-section">
     <div class="container">
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <h3 class="alert-heading text-center"><strong>فروش ویژه</strong> جشنواره تخفیفاتی و پیشنهاد های شگفت انگیز</h3>
+      </div>
+
       <h5 class="bg-dark text-light m-1 text-center rounded-3" style="width: 25vh">تعداد محصولات ({{ Number(count).toLocaleString('fa-IR') }})</h5>
       <br>
       <div class="row">
@@ -63,8 +58,6 @@
             محصولات بعدی
           </button>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -76,7 +69,7 @@ import {mapState} from "pinia";
 import axios from "axios";
 
 export default {
-  name: "CategoryShopView",
+  name: "SpecialProductsView",
   data() {
     return {
       products: null,
@@ -89,7 +82,7 @@ export default {
     ...mapState(useServerStore, ['serverDomain'])
   },
   async mounted() {
-    await axios.get(`${this.serverDomain}/product/products-with-category/${this.$route.params['category']}`).then(
+    await axios.get(`${this.serverDomain}/product/spacial_products/`).then(
         (response) => {
           this.products = response.data.results
           this.next = response.data.next

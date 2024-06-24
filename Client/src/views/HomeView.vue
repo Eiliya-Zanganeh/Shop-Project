@@ -1,43 +1,41 @@
 <template>
 
   <hero-component/>
-
-  <product-categorys-component/>
-
-  <product-slider-component :title="'محصولات ویژه'" :products="popularProducts"/>
+  <product-categories-component>
+    <swiper-slide>
+      <router-link class="p-0 d-flex justify-content-center align-items-center flex-column" :to="{name: 'shop'}">
+        <br>
+        <button class="btn btn-outline-danger text-center p-0 w-50">
+          <br>
+          <i style="font-size: 5vh;"
+             class="bi bi-arrow-left"></i>
+        </button>
+      </router-link>
+    </swiper-slide>
+  </product-categories-component>
+  <popular-products-component/>
 
 </template>
 
 <script>
 import HeroComponent from "@/components/HomeView/HeroComponent.vue";
-import {mapActions, mapState} from "pinia";
-import useServerStore from "@/stores/server.js";
-import ProductCategorysComponent from "@/components/HomeView/ProductCategorysComponent.vue";
-import ProductSliderComponent from "@/components/ProductSliderComponent.vue";
+import ProductCategoriesComponent from "@/components/ShopView/ProductCategoriesComponent.vue";
+import PopularProductsComponent from "@/components/ShopView/PopularProductsComponent.vue";
+import {SwiperSlide} from "swiper/vue";
 
 export default {
   name: "HomeView",
   components: {
-    ProductSliderComponent,
-    ProductCategorysComponent,
+    SwiperSlide,
+    PopularProductsComponent,
+    ProductCategoriesComponent,
     HeroComponent
-  },
-  methods: {
-    ...mapActions(useServerStore, ['getPopularProducts', 'getProductCategorys']),
-  },
-  computed: {
-    ...mapState(useServerStore, ['popularProducts']),
-  },
-  mounted() {
-    this.getPopularProducts()
-    this.getProductCategorys()
   }
 }
 </script>
 
 <style>
 @import "@/assets/home/css/bootstrap.min.css";
-@import "@/assets/home/css/font-awesome.css";
 @import "@/assets/home/css/tiny-slider.css";
 @import "@/assets/home/css/style.css";
 @import 'bootstrap-icons/font/bootstrap-icons.css';

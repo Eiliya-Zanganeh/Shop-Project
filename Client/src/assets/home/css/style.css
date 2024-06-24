@@ -1,15 +1,6 @@
-/*
-* Template Name: UntreeStore
-* Template Author: Untree.co
-* Author URI: https://untree.co/
-* License: https://creativecommons.org/licenses/by/3.0/
-*/
 @font-face {
     font-family: Yekan;
-    src: url('/public/yekan-font/Yekan.eot');
-    src: url('/public/yekan-font/Yekan.eot?#iefix') format('FontName-opentype'),
-    url('/public/yekan-font/Yekan.woff') format('woff'),
-    url('/public/yekan-font/Yekan.ttf') format('truetype');
+    src: url('/public/font/B Koodak Bold_0.ttf');
     font-weight: auto;
     font-style: normal;
 }
@@ -1034,4 +1025,8 @@ textarea {
     height: 50px;
     border-radius: 50%;
     background: rgba(59, 93, 80, 0.2);
+}
+
+.toman{
+    font-size: 18px;
 }

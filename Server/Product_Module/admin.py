@@ -4,7 +4,7 @@ from Product_Module.models import *
 
 @admin.register(ProductModel)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'price', 'buy_count']
+    list_display = ['name', 'price', 'offer_price', 'offer']
     list_filter = ['category']
     list_editable = ['price']
 
