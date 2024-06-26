@@ -17,3 +17,8 @@ class ProductCategoryAdmin(admin.ModelAdmin):
 @admin.register(GalleryModel)
 class GalleryAdmin(admin.ModelAdmin):
     ...
+
+
+@admin.register(LightAndBrightnessModel)
+class LightAndBrightnessAdmin(admin.ModelAdmin):
+    ...
